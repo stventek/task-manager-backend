@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from section.filter import SectionFilter
+from section.models import Section
+from section.serializers import SectionSerializer
 
-# Create your views here.
+from rest_framework import viewsets
+
+class SectionViewSet(viewsets.ModelViewSet):
+  queryset = Section.objects.all()
+  serializer_class = SectionSerializer
+  filterset_class  = SectionFilter
