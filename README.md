@@ -9,12 +9,17 @@ Task manager REST API made using Django REST Framework.
 
 ## Technical Features
 
+- **Swagger Documentation** Access comprehensive API documentation through Swagger.
 - **Filtering:** filter tasks and sections based on the desired criteria.
 - **Paginated response:** Manage the response efficiently with paginated responses.
 - **Sorting:** Sort tasks and sections based on the desired criteria.
 - **Permissions and Groups** fine-grained control over user access with permissions and user groups.
 - **JWT and sessions:** Ensure secure authentication using JSON Web Tokens (JWT) or sessions.
-- **Swagger Documentation** Access comprehensive API documentation through Swagger.
+
+## Swagger documentation
+
+- Read the documentation with redoc at: http://localhost:8000/api/schema/redoc/
+- Readt the documentation with swagger ui at: http://localhost:8000/api/schema/swagger-ui/
 
 ## Installation and Setup
 
@@ -53,7 +58,17 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-7. Access the API documentation at http://localhost:8000/swagger/.
+## Endpoints
+
+Brief description about the endpoints
+
+- **/admin/:** Django admin interface.
+- **/api-auth/:** REST Framework Authentication to use browseable API.
+- **GET, POST, PATCH, DELETE /api/section/:** Section CRUD
+- **GET, POST, PATCH, DELETE /api/task/:** Task CRUD
+- **POST /api/token/:** Obtain JWT Token
+- **POST /api/token/refresh/:** Refresh JWT Token
+- **POST /api/token/verify/:** Verify JWT Token
 
 ## License
 
