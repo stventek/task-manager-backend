@@ -3,14 +3,19 @@ from rest_framework import serializers
 from section.models import Section
 from django.contrib.auth.models import User
 
+from rest_framework.validators import UniqueTogetherValidator
+
 class SectionSerializer(serializers.ModelSerializer):
-  user = serializers.PrimaryKeyRelatedField(read_only=True)
+	user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
-  # on save, add the request.user as the user
-  def create(self, validated_data):
-    validated_data['user'] = self.context['request'].user
-    return super().create(validated_data)
+	validators = [
+		UniqueTogetherValidator(
+			queryset=Section.objects.all(),
+			fields=['user', 'priority']
+		)
+	]
 
-  class Meta:
-    model = Section
-    fields = '__all__'
+	class Meta:
+		model = Section
+		fields = '__all__'
+		

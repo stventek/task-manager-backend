@@ -1,14 +1,17 @@
 from rest_framework import serializers
-
+from rest_framework.validators import UniqueTogetherValidator
+from django.contrib.auth.models import User
 from task.models import Task
 
 class TaskSerializer(serializers.ModelSerializer):
-	user = serializers.PrimaryKeyRelatedField(read_only=True)
+	user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
-	# on save, add the request.user as the user
-	def create(self, validated_data):
-		validated_data['user'] = self.context['request'].user
-		return super().create(validated_data)
+	validators = [
+			UniqueTogetherValidator(
+					queryset=Task.objects.all(),
+					fields=['user', 'section', 'priority']
+			)
+	]
 
 	class Meta:
 		model = Task

@@ -11,3 +11,6 @@ class Section(BaseModel):
 
 	def __str__(self):
 		return self.name
+	
+	class Meta:
+		unique_together = ('user', 'priority',)
