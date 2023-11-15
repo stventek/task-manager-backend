@@ -4,7 +4,7 @@ from section.views import SectionViewSet
 
 router = routers.DefaultRouter()
 
-router.register(r'section', SectionViewSet)
+router.register(r'', SectionViewSet)
 
 urlpatterns = [
   path('', include(router.urls), ),
