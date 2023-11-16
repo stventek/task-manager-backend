@@ -43,6 +43,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'task-manager.stventek.com']
 
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000",]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -58,7 +60,8 @@ INSTALLED_APPS = [
     'section',
     'task',
     'drf_spectacular',
-    'drf_spectacular_sidecar'
+    'drf_spectacular_sidecar',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +72,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'task_manager_backend.urls'
