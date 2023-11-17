@@ -13,8 +13,19 @@ class SectionViewSet(viewsets.ModelViewSet):
 	def get_queryset(self):
 		return Section.objects.filter(user=self.request.user)
 
-	def create(self, request, *args, **kwargs):
-		if isinstance(request.data, QueryDict): # check if is instance of QueryDict so it's easier to unit test
+	def set_user_in_request_data(self, request):
+		if isinstance(request.data, QueryDict):
 				request.data._mutable = True
 		request.data['user'] = request.user.id
+
+	def create(self, request, *args, **kwargs):
+		self.set_user_in_request_data(request)
 		return super().create(request, *args, **kwargs)
+
+	def update(self, request, *args, **kwargs):
+		self.set_user_in_request_data(request)
+		return super().update(request, *args, **kwargs)
+
+	def partial_update(self, request, *args, **kwargs):
+		self.set_user_in_request_data(request)
+		return super().update(request, *args, **kwargs)
