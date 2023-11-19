@@ -17,7 +17,12 @@ from datetime import timedelta
 
 load_dotenv()
 
-ENV = os.environ.get('ENV')
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'task-manager.stventek.com']
+
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000",]
+
+ENV = os.environ.get('ENV', 'LOCAL')
 
 if ENV == 'QA':
     DEBUG = True
@@ -30,7 +35,6 @@ elif ENV == 'PROD':
     from task_manager_backend.prod import *
 else:
     DEBUG = True
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,10 +44,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'task-manager.stventek.com']
-
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000",]
 
 # Application definition
 

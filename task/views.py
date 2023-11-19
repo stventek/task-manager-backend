@@ -28,12 +28,14 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 	def partial_update(self, request, *args, **kwargs):
 		self.set_user_in_request_data(request)
-		return super().update(request, *args, **kwargs)
+		return super().partial_update(request, *args, **kwargs)
 
 	def ensure_ownership(self, serializer):
 		user = serializer.validated_data['user']
-		section = serializer.validated_data['section']
-		if section.user != self.request.user or user != self.request.user:
+		section = serializer.validated_data.get('section')
+		if section is not None and section.user != self.request.user:
+			raise exceptions.PermissionDenied("You have no ownership for this operation")
+		if user != self.request.user:
 			raise exceptions.PermissionDenied("You have no ownership for this operation")
 		serializer.save()
 

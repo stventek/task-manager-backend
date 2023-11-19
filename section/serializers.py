@@ -9,7 +9,11 @@ from task.serializers import TaskSerializer
 
 class SectionSerializer(serializers.ModelSerializer):
 	user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-	tasks = TaskSerializer(many=True, read_only=True)
+	tasks = serializers.SerializerMethodField()
+	
+	def get_tasks(self, instance):
+		tasks = instance.tasks.all().order_by('priority')
+		return TaskSerializer(tasks, many=True).data
 
 	# remove objects not owned by the user in the options from browseable API as well
 	def __init__(self, *args, **kwargs):
