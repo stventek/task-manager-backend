@@ -28,4 +28,4 @@ class SectionViewSet(viewsets.ModelViewSet):
 
 	def partial_update(self, request, *args, **kwargs):
 		self.set_user_in_request_data(request)
-		return super().update(request, *args, **kwargs)
+		return super().partial_update(request, *args, **kwargs)
