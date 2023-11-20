@@ -21,7 +21,7 @@ class CustomDjangoModelPermissions(DjangoModelPermissions):
 		action = view.action
 
 		# skip as they are part of django.contrib.auth permissions
-		if action in ['list', 'create', 'destroy', 'update', 'retrieve']: return True
+		if action in ['list', 'create', 'destroy', 'update', 'retrieve', 'partial_update']: return True
 
 		# only authenticated users can do OPTIONS and HEAD, DjangoModelPermissions allows authenticated users only already
 		if request.method in ['OPTIONS', 'HEAD']: return True
