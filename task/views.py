@@ -44,3 +44,4 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 	def perform_update(self, serializer):
 		self.ensure_ownership(serializer) 
+		

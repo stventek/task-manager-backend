@@ -57,12 +57,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
-    'common',
-    'section',
-    'task',
     'drf_spectacular',
     'drf_spectacular_sidecar',
     'corsheaders',
+    'common',
+    'section',
+    'task',
 ]
 
 MIDDLEWARE = [
@@ -102,8 +102,8 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend', 'rest_framework.filters.OrderingFilter'],
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'common.session_authentication.CsrfExecptSessionAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication'),
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'common.session_authentication.CsrfExecptSessionAuthentication',),
     'DEFAULT_PERMISSION_CLASSES': [
         'common.permissions.CustomDjangoModelPermissions',
     ],
@@ -184,3 +184,5 @@ STATIC_URL = 'api/static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/api/static')
